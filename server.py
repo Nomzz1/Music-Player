@@ -28,7 +28,8 @@ def home():
     songList = []
     directory = fsencode(UPLOAD_FOLDER)
     for i in listdir(directory):
-        songList.append(fsdecode(i))
+        if fsdecode(i).endswith(".mp3"):
+            songList.append(fsdecode(i))
     songList = sorted(songList)
     songLen = len(songList)
     return render_template("index.html", songList = songList, songLen = songLen)
