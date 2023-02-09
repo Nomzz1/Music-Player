@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel = "stylesheet" href = "..\static\styles.css"/>
+        <link rel="icon" href="..\static\images\music-solid.svg"/>
+        <script src = "..\static\script.js" defer></script>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,700,1,0" />
+        <title>Music Player</title>
+    </head>
+    <body>
+        <form id = "fileForm" method = "post" enctype= "multipart/form-data" action = "/">
+            <br>
+            <br>
+            <label for = "fileInput" class = "button">Choose files to upload</label>
+            <input name = "fileInput" id = "fileInput" type = "file" accept = "audio/*" onchange = "fileUpload()" hidden multiple>
+            <br>
+            <br>
+            <label for = "submit" class = "button" id = "submitLabel">No files chosen</label>
+            <input name = "submit" id = "submit" type = "submit" hidden>
+        </form>
+        <p id = "fileList"></p>
+    </body>
+</html>

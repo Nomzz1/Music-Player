@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel = "stylesheet" href = "..\static\styles.css"/>
+        <link rel="icon" href="..\static\images\music-solid.svg"/>
+        <script src = "..\static\script.js" defer></script>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,700,1,0" />
+        <title>Music Player</title>
+    </head>
+    <body>
+        <div id = "musicContainer">
+            {% if songLen == 0:%}
+            <p>Click the button in the bottom right to add music.</p>
+            {% endif %}
+            {% for i in songList:%}
+            <div class = "individualContainer">
+                <div style="display: flex;">
+                    <button onclick = "play('{{i}}')" class = "clrButton"><span class="material-symbols-outlined">play_arrow</span></button>
+                    <p name = "song" id = "{{i}}">{{i.replace(".mp3","").replace("_"," ")}}</p>
+                </div>
+                <button onclick = "addToQueue('{{i}}')" class = "clrButton"><span class="material-symbols-outlined">queue_music</span></button>
+            </div>
+            <br>
+            {% endfor %}
+            <div id = "scrollBuffer"><br><br><br><br></div>
+        </div>
+        <div id = "controller">
+            <input type = "range" min="0" max = "1000" value = "0" id = "timeBar" oninput="changeTime(this.value)">
+            <div style = "display:grid;width:100%;grid-template-columns:repeat(5,1fr);">
+                <p id = "playingNow" style = "grid-column:1;justify-self:start;align-self:center;">Playing Now: (No song selected)</p>
+                <p id = "currentTime" style = "grid-column:2;justify-self:end;align-self:center;">--:--</p>
+                <div style = "grid-column:3;justify-self:center;align-self:center;">
+                    <button id = "shuffle" onclick="shuffle()"><span class = "material-symbols-outlined">shuffle</span></button>
+                    <button id = "rewind" onclick = "rewind()"><span class="material-symbols-outlined">skip_previous</span></button>
+                    <button id = "pause" onclick = "pause()"><span id = "pauseIcon" class="material-symbols-outlined">pause</span></button>
+                    <button id = "skip" onclick = "nextSong()"><span class="material-symbols-outlined">skip_next</span></button>
+                    <button onclick="repeat()"><span id = "repeat" class = "material-symbols-outlined">repeat</span></button>
+                </div>
+                <div style = "grid-column:4;justify-self:center;align-self:center;display: flex;">
+                    <button onclick = "mute()"><span id = "mute" class="material-symbols-outlined">volume_off</span></button>
+                    <input type = "range" min="0" max = "100" value = "50" id = "volume" oninput="changeVolume(this.value)">
+                    <p id = "volumeValue">50</p>
+                </div>
+                <form action="form" style = "grid-column:5;justify-self:end;align-self:center;position: relative;right: 5%;">
+                    <label for = "submit" class = "button">Click here to upload music</label>
+                    <input id = "submit" name = "submit" type = "submit" hidden>
+                </form>
+            </div>
+        </div>
+        <div id = "displayQueue">
+            <p>Playing Next:</p>
+            <ul id = "queue"></ul>
+            <button onclick = "clearQueue()">Clear queue</button>
+        </div>
+    </body>
+</html>
